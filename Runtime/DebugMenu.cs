@@ -15,6 +15,21 @@ namespace DebugMenuUtility
         Styles styles;
         bool visible;
 
+        public static bool CanBeOpened
+        {
+            get
+            {
+                return (instance != null) ? instance.canBeOpened : false;
+            }
+            set
+            {
+                if (instance != null) instance.canBeOpened = value;
+            }
+        }
+            
+        [SerializeField]
+        bool canBeOpened = true;
+
         string currentPath;
         string menuName;
         int selected = 0;
@@ -56,6 +71,21 @@ namespace DebugMenuUtility
             DontDestroyOnLoad(go);
             instance = menu;
         }
+
+        public static void Open()
+        {
+            if (instance != null && ! instance.visible)
+                instance.visible = true;
+        }
+
+
+        public static void Close()
+        {
+            if(instance != null && instance.visible)
+                instance.visible = false;
+        }
+
+
 
         private void OnEnable()
         {
@@ -101,7 +131,14 @@ namespace DebugMenuUtility
 
         private void Update()
         {
-            if (config.toggle.WasPressedThisFrame())
+            if(!canBeOpened)
+            {
+                // Not supposed to be visible, so let's close it and return;
+                if(visible) visible = false;
+                return;
+            }
+
+            if (config.toggle.WasPressedThisFrame()  && canBeOpened)
             {
                 visible = !visible;
                 selected = 0;

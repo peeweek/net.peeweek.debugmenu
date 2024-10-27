@@ -43,6 +43,22 @@ There is a simple API revolving around the debug menu, it enables handling thing
 
 The `DebugMenu` class can be accessed via the `using DebugMenuUtility;` namespace usage.
 
+### Opening / Closing Programmatically
+
+The debug menu can be handled programmatically (starting 0.2.0) using simple Calls
+
+```csharp
+DebugMenu.Open();					// Opens the Debug Menu, if openable
+DebugMenu.Close();					// Closes the Debug Menu
+
+DebugMenu.CanBeOpened = true;		// Makes the debug Menu openable
+
+DebugMenu.CanBeOpened = false;		// Makes the debug Menu not openable, if it is open, 
+									// it will be closed next frame
+```
+
+Of course, the `DebugMenu.Close()` can be called during a `DebugMenuItem.Validate()` function, so it closes the menu upon selecting the entry.
+
 ### Handling Open/Close of the menu
 
 A callback is available through the `DebugMenu.onDebugMenuToggle` event. It calls a delegate with a bool argument that tells whether the menu is opened or not. In the example below, the callback sets a `paused` flag to prevent player movement while the menu is visible. 

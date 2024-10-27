@@ -1,7 +1,7 @@
 {
   "name": "net.peeweek.debug-menu",
   "displayName": "Debug Menu",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "unity": "2021.3",
   "description": "A simple Debug Menu for your games. Can be extended by adding your own items using a simple C# API.",
   "type": "tool",
